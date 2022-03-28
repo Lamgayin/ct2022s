@@ -21,8 +21,8 @@
 
         var config = {
             page: {
-                loadingBG: '#6A4C9C',
-                mainBG: '#6A4C9C',
+                loadingBG: 'black',
+                mainBG: 'black',
                 prevBG: 'rgba(255, 255, 255, 0.198)',
 				smTitle: 'Type Design and Character Encoding'
             },
@@ -40,28 +40,27 @@
 				//homework 圓圈底色
                 hwCircleColor: '#374669',
 				//homework 圓圈邊框顏色
-				hwCircleStroke: 'white',
+				hwCircleStroke: 'rgba(255,255,255,0.2)',
 				//圓變漢字部分字體顏色
 				nameCircleStroke: 'white',
 				//tick 字體顏色
                 tickTextColor: 'white',	
 				//圓變漢字部分字體顏色 (預設 random)
-				nameTextColor: 'green',
-                nameText: '展示用',
+				nameTextColor: 'rgba(86,58,34,0.1)',
+                nameText: '林嘉欣',
 				//圓變漢字部分圓形顏色
-                nameCircleColor: 'rgba(106,76,156,0.3)',
+                nameCircleColor: 'rgba(0,0,0,0.6)',
                 nameTransitionLoop: true,
-                hwFontFamily: 'DFKai-sb',
                 hwFontPosition: {
                     dx: '-23px',
                     dy: '15px'
                 },
 				//圓變漢字時間
-				hwTickDuration: 2000,
+				hwTickDuration: 3000,
                 hwTickDelay: 2000
             },
             loading: {
-                githubAccount: 't109598105',
+                githubAccount: 'Lamgayin',
                 githubRepo: 'portfolio-demo',
 				//自動載入圖片，如果作業有 cross-domain 的話，不要設為 true
 				autoLoading: true
@@ -72,7 +71,7 @@
 			var PCP = PolarClockPortfolio;
 			PCP.config = config;
 			PCP.hw = hw;
-			PCP.fontSource = 'https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf';
+			PCP.fontSource = '../assets/fonts/HanYiShouJinShuFan-1.ttf';
 
             PCP.onLoadLoadingPage = function(){
                 console.log('Loading Success');
