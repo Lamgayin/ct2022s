@@ -4,7 +4,8 @@
     <meta charset="utf-8">
 </head>
 
-<body>
+<body style="background-color: #4158D0;
+        background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);">
     <div id="app"></div>
 	<script src="./dist/polarclockportfolio.min.js"></script>
     <script>
@@ -65,29 +66,29 @@
             }
         ];
 
+
+
         var config = {
             page: {
-                loadingBG: '#6A4C9C',
-                mainBG: '#6A4C9C',
-                prevBG: 'rgba(255, 255, 255, 0.198)',
+                loadingBG: 'rgba(255, 255, 255, 0)',
+                mainBG: 'rgba(32, 32, 32, 0)',
+                prevBG: 'rgba(255, 255, 255, 0.1)',
 				smTitle: 'Type Design and Character Encoding'
             },
             polarClock: {
                 size: innerHeight + 30,
-                fieldTrackColor: '#3d2033',
+                fieldTrackColor: 'rgba(32,32,32)',
 				fieldTickColor: '#222',
-                hwTextColor: '#a2eafa',
+                hwTextColor: 'rgba(32,32,32)',
 				fieldTickStroke: 'black',
-                hwCircleColor: '#374669',
-				hwCircleStroke: 'white',
-				nameCircleStroke: 'white',
+                hwCircleColor: 'rgba(255,255,25,0)',
+				hwCircleStroke: 'rgba(32,32,32)',
+				nameCircleStroke: 'rgba(32,32,32)',
                 tickTextColor: 'white',	
-				nameTextColor: 'black',
+				nameTextColor: 'rgba(0,0,0)',
                 nameText: '林嘉欣',
-                nameCircleColor: 'rgba(106,76,156,0.1)',
+                nameCircleColor: 'rgba(106,76,156,0)',
                 nameTransitionLoop: true,
-				
-				//hwFontFamily: '\'cwTeXFangSong\', serif;',
                 hwFontPosition: {
                     dx: '-23px',
                     dy: '15px'

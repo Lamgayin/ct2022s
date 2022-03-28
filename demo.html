@@ -9,7 +9,7 @@
 	<script src="https://cdn.jsdelivr.net/gh/t109598105/portfolio-demo@latest/dist/polarclockportfolio.min.js"></script>
     <script>
         
-		var TianGanDiZhi = '子丑寅卯辰巳午未申酉戌亥甲';
+		var TianGanDiZhi = '子丑寅卯辰巳午未申酉戌亥';
 		
 		var hw = TianGanDiZhi.split('').map(function(e, i){
 			var order = (i+1).toString().length == 1 ? '0' + (i+1).toString() : (i+1).toString();
@@ -52,18 +52,18 @@
                 nameCircleColor: 'rgba(0,0,0,0.6)',
                 nameTransitionLoop: true,
                 hwFontPosition: {
-                    dx: '-23px',
+                    dx: '-21px',
                     dy: '15px'
                 },
-		//圓變漢字時間
-		hwTickDuration: 3000,
+				//圓變漢字時間
+				hwTickDuration: 3000,
                 hwTickDelay: 2000
             },
             loading: {
                 githubAccount: 'Lamgayin',
                 githubRepo: 'portfolio-demo',
-		//自動載入圖片，如果作業有 cross-domain 的話，不要設為 true
-		autoLoading: true
+				//自動載入圖片，如果作業有 cross-domain 的話，不要設為 true
+				autoLoading: true
             }
         };
 		
