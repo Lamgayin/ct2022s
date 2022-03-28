@@ -55,15 +55,15 @@
                     dx: '-23px',
                     dy: '15px'
                 },
-				//圓變漢字時間
-				hwTickDuration: 3000,
+		//圓變漢字時間
+		hwTickDuration: 3000,
                 hwTickDelay: 2000
             },
             loading: {
                 githubAccount: 'Lamgayin',
                 githubRepo: 'portfolio-demo',
-				//自動載入圖片，如果作業有 cross-domain 的話，不要設為 true
-				autoLoading: true
+		//自動載入圖片，如果作業有 cross-domain 的話，不要設為 true
+		autoLoading: true
             }
         };
 		
@@ -71,7 +71,7 @@
 			var PCP = PolarClockPortfolio;
 			PCP.config = config;
 			PCP.hw = hw;
-			PCP.fontSource = '/assets/fonts/HanYiShouJinShuFan-1.ttf';
+			PCP.fontSource = 'assets/fonts/HanYiShouJinShuFan-1.ttf';
 
             PCP.onLoadLoadingPage = function(){
                 console.log('Loading Success');
