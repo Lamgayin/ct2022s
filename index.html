@@ -105,6 +105,7 @@
         },
       };
 
+<<<<<<< HEAD
       window.onload = function () {
         var PCP = PolarClockPortfolio;
         PCP.config = config;
@@ -116,6 +117,39 @@
         };
         PCP.onLoadMainPage = function () {
           console.log("Main Page Rendered");
+=======
+        var config = {
+            page: {
+                loadingBG: '#6A4C9C',
+                mainBG: 'rgba(32, 32, 32, 0)',
+                prevBG: 'rgba(255, 255, 255, 0.1)',
+				smTitle: 'Type Design and Character Encoding'
+            },
+            polarClock: {
+                size: innerHeight + 30,
+                fieldTrackColor: 'rgba(32,32,32)',
+				fieldTickColor: '#222',
+                hwTextColor: 'rgba(32,32,32)',
+				fieldTickStroke: 'black',
+                hwCircleColor: 'rgba(255,255,25,0)',
+				hwCircleStroke: 'rgba(32,32,32)',
+				nameCircleStroke: 'rgba(32,32,32)',
+                tickTextColor: 'white',	
+				nameTextColor: 'rgba(0,0,0)',
+                nameText: '林嘉欣',
+                nameCircleColor: 'rgba(106,76,156,0)',
+                nameTransitionLoop: true,
+                hwFontPosition: {
+                    dx: '-23px',
+                    dy: '15px'
+                }
+            },
+            loading: {
+                githubAccount: 'Lamgayin',
+                githubRepo: 'portfolio-demo',
+                autoLoading: false
+            }
+>>>>>>> 0a1f7284ecca935fe6f3708b6aa40b394c4b90c4
         };
 
         PCP.resizePreview = true;
@@ -123,5 +157,11 @@
         PCP.render();
       };
     </script>
+<<<<<<< HEAD
   </body>
+=======
+
+</body>
+
+>>>>>>> 0a1f7284ecca935fe6f3708b6aa40b394c4b90c4
 </html>
