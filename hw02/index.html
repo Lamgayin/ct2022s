@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+  <!--  -->
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -115,17 +117,24 @@
       </div>
       <div>
         <label for="point-switch"> Hide Points </label>
-        <input type="checkbox" id="point-switch" checked />
+        <input
+          type="checkbox"
+          id="point-switch"
+          onclick="oncheck(this)"
+          checked
+        />
       </div>
       <div
         id="svg_image"
         style="display: inline-block; height: 15rem; width: 10%"
       ></div>
       <div
+        id="glyphs"
         style="display: inline-block; height: 15rem; width: 70%; float: right"
       >
         <textarea id="svg_text" style="height: 100%; width: 100%"></textarea>
       </div>
+
       <div style="clear: both; padding: 0; border: 0"></div>
     </div>
 
@@ -154,13 +163,15 @@
 
     <!-- score outputer -->
     <script src="https://cdn.jsdelivr.net/gh/t109598105/ScoreOutputer@latest/dist/scoreoutputer.min.js"></script>
-
+    <script src="./FileSaver.js"></script>
+    <script src="./boring.js"></script>
     <script type="text/javascript">
       /** Global variables */
       var openTypeFont = null;
       var svgHTML = ";";
       var plane_select = 0;
       var code_point = 0;
+      var glyph;
       var unicode = [
         "BMP",
         "SMP",
@@ -183,15 +194,12 @@
       /** Your code goes here */
       /***/
 
-      /** create font svg function */
-      function create_font_svg() {
-        console.log("start create_font_svg()...");
-
-        /** Your code goes here */
-
-        console.log("end create_font_svg()...");
-      }
       /***/
+      /** 字體描點開關*/
+      /***/
+      function oncheck(o) {
+        create_font_svg();
+      }
 
       /** build plane function */
       function build_plane() {
@@ -234,7 +242,6 @@
               (255 - (i % 256)).toString() +
               ")";
             var cp = plane_select * 65536 + i;
-
             if (cp >= 0xd800 && cp <= 0xdb7f) {
               value = "red";
             } else if (cp >= 0xdb80 && cp <= 0xdbff) {
@@ -242,13 +249,16 @@
             } else if (cp >= 0xdc00 && cp <= 0xdfff) {
               value = "cyan";
             }
-
             return value;
           })
           .on("click", function (event) {
             var coords = d3.mouse(this);
+            code_point =
+              plane_select * 65536 +
+              Math.floor(coords[1] / 4) * 256 +
+              Math.floor(coords[0] / 4);
+            code_point = Math.max(0, code_point);
             d3.select("#tooltip_click").remove();
-
             svg2
               .append("text")
               .text(
@@ -266,33 +276,29 @@
               .attr("y", function (d, i) {
                 return Math.floor(coords[1]) + 64;
               })
-              .attr("fill", "#ff0")
               .attr("font-size", "24pt")
               .attr("id", "tooltip_click");
-
             d3.select(this).attr("fill", "orange");
-
             create_font_svg();
           })
           .on("mouseover", function (event) {
             var coords = d3.mouse(this);
-
-            code_point =
+            var code_point1 =
               plane_select * 65536 +
               Math.floor(coords[1] / 4) * 256 +
               Math.floor(coords[0] / 4);
-            code_point = Math.max(0, code_point);
+            code_point1 = Math.max(0, code_point1);
 
             svg2
               .append("text")
               .text(
                 "0x" +
-                  "000000".substr(code_point.toString(16).length) +
-                  code_point.toString(16) +
+                  "000000".substr(code_point1.toString(16).length) +
+                  code_point1.toString(16) +
                   ", " +
-                  code_point.toString() +
+                  code_point1.toString() +
                   ", " +
-                  String.fromCodePoint(code_point)
+                  String.fromCodePoint(code_point1)
               )
               .attr("x", function (d, i) {
                 return coords[0] + 8;
@@ -381,9 +387,7 @@
             );
           })
           .on("mousemove", function () {
-            //console.log();
             //Get this bar's x/y values, then augment for the tooltip
-            console.log(d3.mouse(this));
             var xPosition = parseInt(d3.mouse(this)[0]);
             var yPosition = parseInt(d3.mouse(this)[1]);
             d3.select("#tooltip_planes").remove();
@@ -409,7 +413,6 @@
             currentSelectPlane = d3
               .select("#plane" + plane_select)
               .classed("selected", true);
-            //console.log(d + ', ' + plane_select + ', ' + o_pe);
             d3.select("#plane_now").html(
               d + ", plane_select = " + plane_select
             );
@@ -433,17 +436,6 @@
           .attr("font-size", "12pt");
 
         console.log("end build_plane_selection()...");
-
-        // .attr("fill", function(d, i) {
-        //     return 'rgb('
-        //     + (0).toString()
-        //     + ', '
-        //     + (i % 17 * 16).toString()
-        //     + ', '
-        //     + (i % 17 * 16).toString()
-        //     + ')';
-        //     }
-        // )
       }
       /***/
 
@@ -455,14 +447,37 @@
         /** autoload font data */
         /** Your code goes here */
         /***/
+        d3.request("./SourceHanSerif.ttf")
+          .responseType("arraybuffer")
+          .get(function (d) {
+            openTypeFont = opentype.parse(d.response);
+          });
 
         /** font selection */
         /** Your code goes here */
         /***/
+        d3.select("#select-font").on("change", function () {
+          if (this.files[0].name.split(".").slice(-1)[0] != "ttf") {
+            return console.error("Not a valid ttf file");
+          }
+          var fr = new FileReader();
+          fr.onload = function () {
+            openTypeFont = opentype.parse(fr.result);
+            console.log(openTypeFont);
+          };
+          fr.readAsArrayBuffer(this.files[0]);
+        });
 
         /** download svg text */
         /** Your code goes here */
         /***/
+        d3.select("#download-svg").on("click", function () {
+          var canvas = document.getElementById("cid");
+          canvas.toBlob(function (blob) {
+            var point_status = document.getElementById("point-switch").checked;
+            saveAs(blob, code_point.toString() + "_" + point_status + ".png");
+          });
+        });
       });
 
       var so = new ScoreOutputer("110598403");
@@ -478,7 +493,7 @@
         //addChild 要比 renderModal 先呼叫
         so.addChild("字型檔手動讀取", 6, true);
         so.addChild("字型檔自動讀取", 2, true);
-        so.addChild("字型描點", 2, false);
+        so.addChild("字型描點", 2, true);
 
         //產生自評表，參數如下所示
         so.renderModal(
