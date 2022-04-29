@@ -17,151 +17,142 @@
     <div id="app"></div>
     <script src="../dist/polarclockportfolio.min.js"></script>
     <script>
-      var hw = [
-        {
-          text: "子",
-          url: "./hw01",
-        },
-        {
-          text: "丑",
-          url: "./hw02",
-        },
-        {
-          text: "寅",
-          url: "./hw03",
-        },
-        {
-          text: "卯",
-          url: "./hw04",
-        },
-        {
-          text: "辰",
-          url: "./hw05",
-        },
-        {
-          text: "巳",
-          url: "./hw06",
-        },
-        {
-          text: "午",
-          url: "./hw07",
-        },
-        {
-          text: "未",
-          url: "./hw08",
-        },
-        {
-          text: "申",
-          url: "./hw09",
-        },
-        {
-          text: "酉",
-          url: "./hw10",
-        },
-        {
-          text: "戌",
-          url: "./hw11",
-        },
-        {
-          text: "亥",
-          url: "./hw12",
-        },
-        {
-          text: "甲",
-          url: "./hw13",
-        },
-      ];
-
-      var config = {
-        page: {
-          loadingBG: "#6A4C9C",
-          mainBG: "rgba(32, 32, 32, 0)",
-          prevBG: "rgba(255, 255, 255, 0.1)",
-          smTitle: "Type Design and Character Encoding",
-        },
-        polarClock: {
-          size: innerHeight + 30,
-          fieldTrackColor: "rgba(32,32,32)",
-          fieldTickColor: "#222",
-          hwTextColor: "rgba(32,32,32)",
-          fieldTickStroke: "black",
-          hwCircleColor: "rgba(255,255,25,0)",
-          hwCircleStroke: "rgba(32,32,32)",
-          nameCircleStroke: "rgba(32,32,32)",
-          tickTextColor: "white",
-          nameTextColor: "rgba(0,0,0)",
-          nameText: "林嘉欣",
-          nameCircleColor: "rgba(106,76,156,0)",
-          nameTransitionLoop: true,
-          hwFontPosition: {
-            dx: "-23px",
-            dy: "15px",
+        var hw = [
+          {
+            text: "子",
+            url: "./hw01",
           },
-        },
-        loading: {
-          githubAccount: "Lamgayin",
-          githubRepo: "portfolio-demo",
-          autoLoading: false,
-        },
-      };
+          {
+            text: "丑",
+            url: "./hw02",
+          },
+          {
+            text: "寅",
+            url: "./hw03",
+          },
+          {
+            text: "卯",
+            url: "./hw04",
+          },
+          {
+            text: "辰",
+            url: "./hw05",
+          },
+          {
+            text: "巳",
+            url: "./hw06",
+          },
+          {
+            text: "午",
+            url: "./hw07",
+          },
+          {
+            text: "未",
+            url: "./hw08",
+          },
+          {
+            text: "申",
+            url: "./hw09",
+          },
+          {
+            text: "酉",
+            url: "./hw10",
+          },
+          {
+            text: "戌",
+            url: "./hw11",
+          },
+          {
+            text: "亥",
+            url: "./hw12",
+          },
+          {
+            text: "甲",
+            url: "./hw13",
+          },
+        ];
 
-<<<<<<< HEAD
-      window.onload = function () {
-        var PCP = PolarClockPortfolio;
-        PCP.config = config;
-        PCP.hw = hw;
-        PCP.fontSource = "assets/fonts/HanYiShouJinShuFan-1.ttf";
-
-        PCP.onLoadLoadingPage = function () {
-          console.log("Loading Success");
-        };
-        PCP.onLoadMainPage = function () {
-          console.log("Main Page Rendered");
-=======
         var config = {
-            page: {
-                loadingBG: '#6A4C9C',
-                mainBG: 'rgba(32, 32, 32, 0)',
-                prevBG: 'rgba(255, 255, 255, 0.1)',
-				smTitle: 'Type Design and Character Encoding'
+          page: {
+            loadingBG: "#6A4C9C",
+            mainBG: "rgba(32, 32, 32, 0)",
+            prevBG: "rgba(255, 255, 255, 0.1)",
+            smTitle: "Type Design and Character Encoding",
+          },
+          polarClock: {
+            size: innerHeight + 30,
+            fieldTrackColor: "rgba(32,32,32)",
+            fieldTickColor: "#222",
+            hwTextColor: "rgba(32,32,32)",
+            fieldTickStroke: "black",
+            hwCircleColor: "rgba(255,255,25,0)",
+            hwCircleStroke: "rgba(32,32,32)",
+            nameCircleStroke: "rgba(32,32,32)",
+            tickTextColor: "white",
+            nameTextColor: "rgba(0,0,0)",
+            nameText: "林嘉欣",
+            nameCircleColor: "rgba(106,76,156,0)",
+            nameTransitionLoop: true,
+            hwFontPosition: {
+              dx: "-23px",
+              dy: "15px",
             },
-            polarClock: {
-                size: innerHeight + 30,
-                fieldTrackColor: 'rgba(32,32,32)',
-				fieldTickColor: '#222',
-                hwTextColor: 'rgba(32,32,32)',
-				fieldTickStroke: 'black',
-                hwCircleColor: 'rgba(255,255,25,0)',
-				hwCircleStroke: 'rgba(32,32,32)',
-				nameCircleStroke: 'rgba(32,32,32)',
-                tickTextColor: 'white',	
-				nameTextColor: 'rgba(0,0,0)',
-                nameText: '林嘉欣',
-                nameCircleColor: 'rgba(106,76,156,0)',
-                nameTransitionLoop: true,
-                hwFontPosition: {
-                    dx: '-23px',
-                    dy: '15px'
-                }
-            },
-            loading: {
-                githubAccount: 'Lamgayin',
-                githubRepo: 'portfolio-demo',
-                autoLoading: false
-            }
->>>>>>> 0a1f7284ecca935fe6f3708b6aa40b394c4b90c4
+          },
+          loading: {
+            githubAccount: "Lamgayin",
+            githubRepo: "portfolio-demo",
+            autoLoading: false,
+          },
         };
 
-        PCP.resizePreview = true;
-        PCP.mount("#app");
-        PCP.render();
-      };
+        window.onload = function () {
+          var PCP = PolarClockPortfolio;
+          PCP.config = config;
+          PCP.hw = hw;
+          PCP.fontSource = "assets/fonts/HanYiShouJinShuFan-1.ttf";
+
+          PCP.onLoadLoadingPage = function () {
+            console.log("Loading Success");
+          };
+          PCP.onLoadMainPage = function () {
+            console.log("Main Page Rendered");
+          var config = {
+              page: {
+                  loadingBG: '#6A4C9C',
+                  mainBG: 'rgba(32, 32, 32, 0)',
+                  prevBG: 'rgba(255, 255, 255, 0.1)',
+      smTitle: 'Type Design and Character Encoding'
+              },
+              polarClock: {
+                  size: innerHeight + 30,
+                  fieldTrackColor: 'rgba(32,32,32)',
+      fieldTickColor: '#222',
+                  hwTextColor: 'rgba(32,32,32)',
+      fieldTickStroke: 'black',
+                  hwCircleColor: 'rgba(255,255,25,0)',
+      hwCircleStroke: 'rgba(32,32,32)',
+      nameCircleStroke: 'rgba(32,32,32)',
+                  tickTextColor: 'white',
+      nameTextColor: 'rgba(0,0,0)',
+                  nameText: '林嘉欣',
+                  nameCircleColor: 'rgba(106,76,156,0)',
+                  nameTransitionLoop: true,
+                  hwFontPosition: {
+                      dx: '-23px',
+                      dy: '15px'
+                  }
+              },
+              loading: {
+                  githubAccount: 'Lamgayin',
+                  githubRepo: 'portfolio-demo',
+                  autoLoading: false
+              }
+          };
+
+          PCP.resizePreview = true;
+          PCP.mount("#app");
+          PCP.render();
+        };
     </script>
-<<<<<<< HEAD
   </body>
-=======
-
-</body>
-
->>>>>>> 0a1f7284ecca935fe6f3708b6aa40b394c4b90c4
 </html>
