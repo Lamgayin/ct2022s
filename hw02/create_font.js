@@ -82,7 +82,7 @@ function create_font_svg() {
             .attr("xmlns", "http://www.w3.org/2000/svg")
             .attr("xmlns:svg", "http://www.w3.org/2000/svg")
             .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
-            .attr('viewBox', [0, -glyph.yMin + 30, font.unitsPerEm, font.unitsPerEm].join(' '));
+            .attr('viewBox', [0, -glyph.yMin, font.unitsPerEm, font.unitsPerEm].join(' '));
 
         svg3
             .append("path")
