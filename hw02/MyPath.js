@@ -2,9 +2,9 @@ var MyPath = function () {
 
     function derive(v0, v1, v2, v3, t) {
         return Math.pow(1 - t, 3) * v0 +
-        3 * Math.pow(1 - t, 2) * t * v1 +
-        3 * (1 - t) * Math.pow(t, 2) * v2 +
-        Math.pow(t, 3) * v3;
+            3 * Math.pow(1 - t, 2) * t * v1 +
+            3 * (1 - t) * Math.pow(t, 2) * v2 +
+            Math.pow(t, 3) * v3;
     }
     /**
      * A bounding box is an enclosing box that describes the smallest measure within which all the points lie.
@@ -314,32 +314,32 @@ var MyPath = function () {
         for (let i = 0; i < this.commands.length; i++) {
             const cmd = this.commands[i];
             switch (cmd.type) {
-            case 'M':
-                box.addPoint(cmd.x, cmd.y);
-                startX = prevX = cmd.x;
-                startY = prevY = cmd.y;
-                break;
-            case 'L':
-                box.addPoint(cmd.x, cmd.y);
-                prevX = cmd.x;
-                prevY = cmd.y;
-                break;
-            case 'Q':
-                box.addQuad(prevX, prevY, cmd.x1, cmd.y1, cmd.x, cmd.y);
-                prevX = cmd.x;
-                prevY = cmd.y;
-                break;
-            case 'C':
-                box.addBezier(prevX, prevY, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y);
-                prevX = cmd.x;
-                prevY = cmd.y;
-                break;
-            case 'Z':
-                prevX = startX;
-                prevY = startY;
-                break;
-            default:
-                throw new Error('Unexpected path command ' + cmd.type);
+                case 'M':
+                    box.addPoint(cmd.x, cmd.y);
+                    startX = prevX = cmd.x;
+                    startY = prevY = cmd.y;
+                    break;
+                case 'L':
+                    box.addPoint(cmd.x, cmd.y);
+                    prevX = cmd.x;
+                    prevY = cmd.y;
+                    break;
+                case 'Q':
+                    box.addQuad(prevX, prevY, cmd.x1, cmd.y1, cmd.x, cmd.y);
+                    prevX = cmd.x;
+                    prevY = cmd.y;
+                    break;
+                case 'C':
+                    box.addBezier(prevX, prevY, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y);
+                    prevX = cmd.x;
+                    prevY = cmd.y;
+                    break;
+                case 'Z':
+                    prevX = startX;
+                    prevY = startY;
+                    break;
+                default:
+                    throw new Error('Unexpected path command ' + cmd.type);
             }
         }
         if (box.isEmpty()) {

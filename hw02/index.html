@@ -20,9 +20,9 @@
       }
 
       svg {
-        border: red solid 1px;
-        /*margin: 10px;*/
-        font-size: 36pt;
+        border: black solid 1px;
+        margin: 10px;
+        font-size: 10pt;
       }
 
       li {
@@ -113,7 +113,8 @@
         <input type="file" id="select-font" />
       </div>
       <div>
-        <a href="javascript:void(0)" id="download-svg"> Download </a>
+        <a href="javascript:void(0)" id="download-png"> Download PNG</a>
+        <a href="javascript:void(0)" id="download-svg"> Download SVG</a>
       </div>
       <div>
         <label for="point-switch"> Hide Points </label>
@@ -124,15 +125,21 @@
           checked
         />
       </div>
-      <div
-        id="svg_image"
-        style="display: inline-block; height: 15rem; width: 10%"
-      ></div>
-      <div
-        id="glyphs"
-        style="display: inline-block; height: 15rem; width: 70%; float: right"
-      >
-        <textarea id="svg_text" style="height: 100%; width: 100%"></textarea>
+      <div style="display: flex">
+        <div
+          id="svg_image_png"
+          style="display: inline-block; height: 15rem; width: 15%"
+        ></div>
+        <div
+          id="svg_image_svg"
+          style="display: inline-block; height: 15rem; width: 15%"
+        ></div>
+        <div
+          id="glyphs"
+          style="display: inline-block; height: 15rem; width: 70%; float: right"
+        >
+          <textarea id="svg_text" style="height: 100%; width: 100%"></textarea>
+        </div>
       </div>
 
       <div style="clear: both; padding: 0; border: 0"></div>
@@ -164,7 +171,7 @@
     <!-- score outputer -->
     <script src="https://cdn.jsdelivr.net/gh/t109598105/ScoreOutputer@latest/dist/scoreoutputer.min.js"></script>
     <script src="./FileSaver.js"></script>
-    <script src="./boring.js"></script>
+    <script src="./create_font.js"></script>
     <script type="text/javascript">
       /** Global variables */
       var openTypeFont = null;
@@ -471,12 +478,23 @@
         /** download svg text */
         /** Your code goes here */
         /***/
-        d3.select("#download-svg").on("click", function () {
+        d3.select("#download-png").on("click", function () {
           var canvas = document.getElementById("cid");
           canvas.toBlob(function (blob) {
             var point_status = document.getElementById("point-switch").checked;
             saveAs(blob, code_point.toString() + "_" + point_status + ".png");
           });
+        });
+
+        d3.select("#download-svg").on("click", function () {
+          var a = d3
+            .create("a")
+            .attr(
+              "href",
+              URL.createObjectURL(new Blob([svgHTML], { type: "text/plain" }))
+            )
+            .attr("download", "output.svg");
+          a.node().click();
         });
       });
 
