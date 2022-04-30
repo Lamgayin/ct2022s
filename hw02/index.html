@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>lamgayinlamgayinlamgayinhwhwhw</title>
+    <title>Dear lamgayin - hw02</title>
     <style type="text/css">
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300&family=Noto+Serif+JP:wght@200&display=swap");
 
@@ -487,13 +487,14 @@
         });
 
         d3.select("#download-svg").on("click", function () {
+          var point_status = document.getElementById("point-switch").checked;
           var a = d3
             .create("a")
             .attr(
               "href",
               URL.createObjectURL(new Blob([svgHTML], { type: "text/plain" }))
             )
-            .attr("download", "output.svg");
+            .attr("download", code_point.toString() + "_" + point_status + ".svg");
           a.node().click();
         });
       });
