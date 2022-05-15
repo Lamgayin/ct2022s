@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <title>Text Drawer</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap);
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            box-sizing: border-box
+        }
+
+        #root {
+            height: 100vh;
+            width: 100vw;
+            padding: 1rem;
+            position: relative;
+            background-color: #6b4c9c38
+        }
+
+        #root:after {
+            content: "";
+            clear: both
+        }
+
+        #root #container,
+        #root #svg-text {
+            float: left;
+            width: 45%;
+            display: inline-block;
+            height: 100%;
+            padding: 20px;
+            margin-right: 10px;
+            border-style: solid;
+            border-width: 1px
+        }
+
+        #root #svg-text textarea {
+            resize: none;
+            height: 100%;
+            width: 100%;
+            font-size: 10px
+        }
+
+        #root #container {
+            position: relative
+        }
+
+        #root #container #drag-tip {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(10, 10, 10, .253);
+            display: none
+        }
+
+        #root #container #drag-tip.dragged {
+            display: table
+        }
+
+        #root #container #drag-tip div {
+            font-size: 100px;
+            vertical-align: middle;
+            text-align: center;
+            display: table-cell
+        }
+
+        #root #side-bar {
+            float: left;
+            width: 8%;
+            display: inline-block;
+            height: 100%;
+            border-style: solid;
+            border-width: 1px
+        }
+
+        #root #side-bar .item {
+            padding: .5rem
+        }
+
+        .my-btn {
+            padding: 5px 10px;
+            color: #fff;
+            background-color: #242477;
+            cursor: pointer;
+            font-size: .8rem;
+            user-select: none
+        }
+
+        .my-btn.activate {
+            padding: 2px 7px;
+            border-style: solid;
+            border-width: 3px;
+            border-color: red
+        }
+
+        svg {
+            cursor: url(pen.svg), auto
+        }
+    </style>
+</head>
+
+<body>
+    <div id=root>
+        <div id=container>
+            <div id=drag-tip>
+                <div>Drag your picture here</div>
+            </div>
+        </div>
+        <div id=svg-text><textarea id=svg-text-area readonly=readonly>  </textarea></div>
+        <div id=side-bar>
+            <div class=item id=score-btn></div>
+            <div class=item>
+                <div id=bg-switch class=my-btn>CloseBG</div>
+            </div>
+            <div class=item>
+                <div id=export-svg class=my-btn>Export</div>
+            </div>
+            <div class=item>
+                <div id=clear-btn class=my-btn>Clear</div>
+            </div>
+            <div class=item>
+                <div id=update-txt class="my-btn activate">UpdateTXT</div>
+            </div>
+            <div class=item>
+                <div id=save-data class=my-btn>SaveData</div>
+            </div>
+        </div>
+    </div>
+    <script src=https://d3js.org/d3.v4.min.js></script>
+    <script src=https://cdn.jsdelivr.net/gh/t109598105/ScoreOutputer@latest/dist/scoreoutputer.min.js></script>
+    <script>d3.select(window).on("load", function () { function a() { s.selectAll("*").remove(), s.selectAll("rect").data(c).enter().append("rect").attr("transform", function (t, e) { return "translate(" + e % n * 20 + "," + 20 * Math.floor(e / n) + ")" }).attr("stroke", "black").attr("stroke-width", ".1px").attr("fill", function (t) { return t ? "black" : "white" }).attr("width", 20).attr("height", 20).on("contextmenu", function (t, e) { d3.event.preventDefault() }).on("mousedown", function (t, e) { Math.floor(e / n); 0 == d3.event.button ? (u = !0, d3.select(this).attr("fill", "black"), c[e] = 1, d && f()) : 2 == d3.event.button && (h = !0, d3.select(this).attr("fill", "white"), c[e] = 0, d && f()) }).on("mousemove", function (t, e) { Math.floor(e / n); u ? (d3.select(this).attr("fill", "black"), c[e] = 1, d && f()) : h && (d3.select(this).attr("fill", "white"), c[e] = 0, d && f()) }).on("mouseup", function (t, e) { 0 == d3.event.button ? u = !1 : 2 == d3.event.button && (h = !1) }), l = s.append("g").attr("style", "opacity: 0.3;pointer-events: none;").attr("display", e ? "" : "none") } function r(t, e) { var n = new FileReader; n.onload = function () { l.selectAll("image").remove(), l.append("image").attr("href", n.result).attr("width", "100%").attr("height", "100%").attr("x", 0).attr("y", 0), "function" == typeof e && e(), d && f() }, n.readAsDataURL(t) } var l, o = d3.select("#container"), t = d3.select("#svg-text-area"), n = (o.node().getBoundingClientRect().width, 46), d = !0, i = null, e = !0, c = new Array(n * n).fill(0), s = o.append("svg").attr("width", "100%").attr("height", "100%").attr("viewBox", "0 0 920 920").attr("xmlns", "http://www.w3.org/2000/svg"), f = function () { t.html(""), t.html(o.html().replace(/\<div(.*)?\<\/div>\<\/div\>/, "").replace(/href\=\"data\:image\/(.*)?\"/, 'href="data:image...."').trim()) }, u = !1, h = !1, v = (a(), o.on("dragenter", function () { d3.event.preventDefault(), d3.select("#drag-tip").classed("dragged", !0) }).on("dragover", function () { d3.event.preventDefault() }).on("drop", function () { d3.event.preventDefault(), d3.select("#drag-tip").classed("dragged", !1); var t, e, n = d3.event.dataTransfer.files[0]; return "dat" == n.name.split(".").slice(-1)[0] ? (t = n, (e = new FileReader).onload = function () { var t = new Uint8Array(e.result); c = Array.from(t), a(), r(i) }, void e.readAsArrayBuffer(t)) : n.type.startsWith("image/") ? (i = n, void r(n)) : console.error("Not a valid image type") }), d3.select("#export-svg").on("click", function () { var t = d3.select(o.node().cloneNode(!0)), e = (t.selectAll("div").remove(), t.html().trim()), n = t.append("a").attr("href", URL.createObjectURL(new Blob([e], { type: "image/svg+xml" }))).attr("download", "export.svg"); n.node().click(), window.setTimeout(function () { URL.revokeObjectURL(n.attr("href")) }, 50) }), d && f(), d3.select("#bg-switch").on("click", function () { (e = !e) ? d3.select(this).text("CloseBG") : d3.select(this).text("ShowBG"), e ? l.attr("display", "") : l.attr("display", "none"), d && f() }), d3.select("#clear-btn").on("click", function () { s.selectAll("rect").attr("fill", "white"), c.fill(0) }), d3.select("#save-data").on("click", function () { var t = Uint8Array.from(c), e = d3.create("a").attr("download", "data.dat").attr("href", URL.createObjectURL(new Blob([t.buffer]))).node(); e.click(), window.setTimeout(function () { URL.revokeObjectURL(e.href) }, 50) }), d3.select("#update-txt").on("click", function () { d = !d, d3.select(this).classed("activate", d) }), new ScoreOutputer("109598105")); v.installCSS(function () { v.addChild("繪製 46x46 格子", 4, 1), v.addChild("讀取圖片背景", 2, 1), v.addChild("輸出 SVG", 2, 1), v.addChild("SVG Text 即時同步", 1, 1), v.addChild("開關背景圖片功能", 1, 1), v.renderModal(document.body, "rgba(100,45,58,1)", "white", "15pt", "15px", "自我評分表"), v.installDownloadBtn(), v.renderBtn(d3.select("#score-btn").node(), "開啟自評表") }) })</script>
+</body>
+
+</html>
